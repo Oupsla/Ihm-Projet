@@ -10,13 +10,16 @@ public class Main {
 
 	public static Main Instance;
 
+	public final static int largeur = 800;
+	public final static int hauteur = 600;
+
 	private JFrame mainFrame;
 	private JPanel panelActuel;
 
 	public Main() {
 		mainFrame = new JFrame("Projet Ihm");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setPreferredSize(new Dimension(800, 600));
+		mainFrame.setPreferredSize(new Dimension(largeur, hauteur));
 		mainFrame.getContentPane().setLayout(new CardLayout());
 		mainFrame.setResizable(false);
 		panelActuel = new FolderIhm();

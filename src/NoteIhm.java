@@ -35,7 +35,7 @@ public class NoteIhm extends JPanel {
 			+ "							<p>Quo cognito Constantius ultra mortalem modum exarsit ac nequo casu idem Gallus de futuris incertus agitare quaedam conducentia saluti suae per itinera conaretur, remoti sunt omnes de industria milites agentes in civitatibus perviis.</p>";
 	private static String ligneHorizontale = "<hr>";
 
-	public NoteIhm() {
+	public NoteIhm(String cours) {
 		this.setLayout(new BorderLayout());
 		JEditorPane ep = new JEditorPane();
 		ep.setContentType("text/html");
@@ -54,6 +54,8 @@ public class NoteIhm extends JPanel {
 		expandPart2.setMargin(new java.awt.Insets(0, 2, 0, 3));
 		expandPart2.setFocusable(false);
 
+		JPanel wraperLeft = new JPanel(new BorderLayout());
+
 		JPanel p = new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 		p.add(Box.createRigidArea(new Dimension(0, 16)));
@@ -62,7 +64,27 @@ public class NoteIhm extends JPanel {
 		p.add(expandPart1);
 		p.add(Box.createRigidArea(new Dimension(0, 86)));
 		p.add(expandPart2);
-		this.add(p, BorderLayout.WEST);
+
+		wraperLeft.add(p, BorderLayout.EAST);
+
+		JButton back = new JButton("<");
+		back.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				NotesIhm notes = new NotesIhm(cours);
+				Main.Instance.switchFrame(notes);
+
+			}
+		});
+		back.setFocusable(false);
+		JPanel pBack = new JPanel();
+		pBack.setLayout(new BoxLayout(pBack, BoxLayout.Y_AXIS));
+		pBack.add(Box.createRigidArea(new Dimension(0, Main.hauteur / 2)));
+		pBack.add(back);
+		wraperLeft.add(pBack, BorderLayout.WEST);
+
+		this.add(wraperLeft, BorderLayout.WEST);
 
 		JButton superNote = new JButton(">");
 		superNote.setFocusable(false);
@@ -127,13 +149,13 @@ public class NoteIhm extends JPanel {
 
 			}
 		});
-		
+
 		expandPart1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (expandPart1.getText().equals("+")) {
-					
+
 					JPanel p = new JPanel();
 					p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 					p.add(Box.createRigidArea(new Dimension(0, 16)));
@@ -143,20 +165,19 @@ public class NoteIhm extends JPanel {
 					p.add(Box.createRigidArea(new Dimension(0, 86)));
 					p.add(expandPart2);
 					NoteIhm.this.add(p, BorderLayout.WEST);
-					
+
 					expandPart1.setText("-");
 					expandPart1.setMargin(new java.awt.Insets(0, 2, 0, 3));
 					String finale = titreChapite;
-					if (expandPart2.getText().equals("-")){
+					if (expandPart2.getText().equals("-")) {
 						finale += titrePartie1 + textePartie1 + titrePartie2 + textePartie2;
-					}
-					else {
+					} else {
 						finale += titrePartie1 + textePartie1 + titrePartie2 + ligneHorizontale;
 					}
 					ep.setText(finale);
-					
+
 				} else { //
-					
+
 					JPanel p = new JPanel();
 					p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 					p.add(Box.createRigidArea(new Dimension(0, 16)));
@@ -166,19 +187,17 @@ public class NoteIhm extends JPanel {
 					p.add(Box.createRigidArea(new Dimension(0, 31)));
 					p.add(expandPart2);
 					NoteIhm.this.add(p, BorderLayout.WEST);
-					
-					
+
 					expandPart1.setText("+");
 					expandPart1.setMargin(new java.awt.Insets(0, 0, 0, 0));
 					String finale = titreChapite;
-					if (expandPart2.getText().equals("-")){
+					if (expandPart2.getText().equals("-")) {
 						System.out.println("coucou");
-						finale += titrePartie1 + ligneHorizontale+ titrePartie2 + textePartie2;
-					}
-					else {
+						finale += titrePartie1 + ligneHorizontale + titrePartie2 + textePartie2;
+					} else {
 						finale += titrePartie1 + ligneHorizontale + titrePartie2 + ligneHorizontale;
 					}
-					
+
 					ep.setText(finale);
 				}
 

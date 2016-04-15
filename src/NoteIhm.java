@@ -1,16 +1,20 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
+import javax.swing.border.LineBorder;
 
 /**
  * 
@@ -41,6 +45,17 @@ public class NoteIhm extends JPanel {
 		ep.setContentType("text/html");
 		ep.setText(titreChapite + titrePartie1 + textePartie1 + titrePartie2 + textePartie2);
 		this.add(ep, BorderLayout.CENTER);
+
+		JButton partagerLaNote = new JButton("Partager ce cours");
+		JPanel pPartage = new JPanel(new GridBagLayout());
+		pPartage.add(partagerLaNote);
+		partagerLaNote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ToastMessage toastMessage = new ToastMessage("Le cours a bien été partagé", 3000);
+				toastMessage.setVisible(true);
+			}
+		});
+		this.add(pPartage, BorderLayout.SOUTH);
 
 		JButton expandChap = new JButton("-");
 		expandChap.setMargin(new java.awt.Insets(0, 2, 0, 3));
@@ -204,5 +219,46 @@ public class NoteIhm extends JPanel {
 			}
 		});
 
+	}
+
+	private class ToastMessage extends JDialog {
+		int miliseconds;
+
+		public ToastMessage(String toastString, int time) {
+			this.miliseconds = time;
+			setUndecorated(true);
+			getContentPane().setLayout(new BorderLayout(0, 0));
+
+			JPanel panel = new JPanel();
+			panel.setBackground(Color.GRAY);
+			panel.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+			getContentPane().add(panel, BorderLayout.CENTER);
+
+			JLabel toastLabel = new JLabel("");
+			toastLabel.setText(toastString);
+			toastLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+			toastLabel.setForeground(Color.WHITE);
+
+			setBounds(100, 100, toastLabel.getPreferredSize().width + 20, 31);
+
+			setAlwaysOnTop(true);
+			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+			int y = dim.height / 2 - getSize().height / 2;
+			int half = y / 2;
+			setLocation(dim.width / 2 - getSize().width / 2, y + half);
+			panel.add(toastLabel);
+			setVisible(false);
+
+			new Thread() {
+				public void run() {
+					try {
+						Thread.sleep(miliseconds);
+						dispose();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}.start();
+		}
 	}
 }

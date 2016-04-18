@@ -16,7 +16,7 @@ public class NotesIhm extends JPanel {
 
 	public String cours;
 
-	public NotesIhm(String cours) {
+	public NotesIhm(final String cours) {
 		this.cours = cours;
 		this.setLayout(new GridBagLayout());
 
@@ -25,7 +25,6 @@ public class NotesIhm extends JPanel {
 
 		button.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				Main.Instance.switchFrame(new FolderIhm());
 			}
@@ -33,7 +32,6 @@ public class NotesIhm extends JPanel {
 
 		ActionListener al = new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				Main.Instance.switchFrame(new NoteIhm(cours));
 			}

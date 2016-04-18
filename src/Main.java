@@ -1,4 +1,5 @@
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -25,10 +26,12 @@ public class Main {
 		panelActuel = new FolderIhm();
 		mainFrame.add(panelActuel);
 		mainFrame.pack();
+		mainFrame.setBackground(Color.white);
+		mainFrame.getContentPane().setBackground(Color.white);
 		mainFrame.setVisible(true);
 	}
 
-	public void switchFrame(JPanel nextPanel) {
+	public void switchFrame(final JPanel nextPanel) {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

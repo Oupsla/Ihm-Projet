@@ -39,9 +39,9 @@ public class NoteIhm extends JPanel {
 			+ "							<p>Quo cognito Constantius ultra mortalem modum exarsit ac nequo casu idem Gallus de futuris incertus agitare quaedam conducentia saluti suae per itinera conaretur, remoti sunt omnes de industria milites agentes in civitatibus perviis.</p>";
 	private static String ligneHorizontale = "<hr>";
 
-	public NoteIhm(String cours) {
+	public NoteIhm(final String cours) {
 		this.setLayout(new BorderLayout());
-		JEditorPane ep = new JEditorPane();
+		final JEditorPane ep = new JEditorPane();
 		ep.setContentType("text/html");
 		ep.setText(titreChapite + titrePartie1 + textePartie1 + titrePartie2 + textePartie2);
 		this.add(ep, BorderLayout.CENTER);
@@ -57,15 +57,15 @@ public class NoteIhm extends JPanel {
 		});
 		this.add(pPartage, BorderLayout.SOUTH);
 
-		JButton expandChap = new JButton("-");
+		final JButton expandChap = new JButton("-");
 		expandChap.setMargin(new java.awt.Insets(0, 2, 0, 3));
 		expandChap.setFocusable(false);
 
-		JButton expandPart1 = new JButton("-");
+		final JButton expandPart1 = new JButton("-");
 		expandPart1.setMargin(new java.awt.Insets(0, 2, 0, 3));
 		expandPart1.setFocusable(false);
 
-		JButton expandPart2 = new JButton("-");
+		final JButton expandPart2 = new JButton("-");
 		expandPart2.setMargin(new java.awt.Insets(0, 2, 0, 3));
 		expandPart2.setFocusable(false);
 
@@ -85,7 +85,6 @@ public class NoteIhm extends JPanel {
 		JButton back = new JButton("<");
 		back.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				NotesIhm notes = new NotesIhm(cours);
 				Main.Instance.switchFrame(notes);
@@ -111,7 +110,6 @@ public class NoteIhm extends JPanel {
 
 		expandChap.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (expandChap.getText().equals("+")) {
 					expandChap.setText("-");
@@ -137,7 +135,6 @@ public class NoteIhm extends JPanel {
 
 		expandPart2.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (expandPart2.getText().equals("+")) {
 					expandPart2.setText("-");
@@ -167,7 +164,6 @@ public class NoteIhm extends JPanel {
 
 		expandPart1.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (expandPart1.getText().equals("+")) {
 

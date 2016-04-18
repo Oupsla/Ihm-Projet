@@ -1,3 +1,4 @@
+package fr.univ.lille1.ihm.panel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -6,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import fr.univ.lille1.ihm.main.Main;
 
 /**
  * Interface representant plusieurs notes pour un même cours Un clic sur un

@@ -1,9 +1,12 @@
+package fr.univ.lille1.ihm.listener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JPanel;
+
+import fr.univ.lille1.ihm.panel.FolderIhm;
 
 public class AddFolderRaccourci implements KeyListener {
 

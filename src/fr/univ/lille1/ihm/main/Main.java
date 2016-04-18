@@ -1,3 +1,4 @@
+package fr.univ.lille1.ihm.main;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,6 +7,8 @@ import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import fr.univ.lille1.ihm.panel.FolderIhm;
 
 public class Main {
 

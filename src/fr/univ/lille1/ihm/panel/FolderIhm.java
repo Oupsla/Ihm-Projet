@@ -1,3 +1,4 @@
+package fr.univ.lille1.ihm.panel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -20,6 +21,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import fr.univ.lille1.ihm.listener.AddFolderRaccourci;
+import fr.univ.lille1.ihm.main.Main;
 
 /**
  * Interface representant plusieurs cours sous forme de dossier

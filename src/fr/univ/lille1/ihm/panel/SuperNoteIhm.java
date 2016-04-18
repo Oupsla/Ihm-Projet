@@ -1,3 +1,4 @@
+package fr.univ.lille1.ihm.panel;
 import javax.swing.JPanel;
 
 

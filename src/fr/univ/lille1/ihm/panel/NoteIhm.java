@@ -1,3 +1,4 @@
+package fr.univ.lille1.ihm.panel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +16,8 @@ import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import fr.univ.lille1.ihm.main.Main;
 
 /**
  * 

@@ -1,5 +1,4 @@
 package fr.univ.lille1.ihm.listener;
-
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

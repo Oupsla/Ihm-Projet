@@ -8,9 +8,8 @@ import java.awt.event.KeyEvent;
  */
 public class AddFolderRaccourci extends AbstractRaccourci {
 
-	private final static Integer[] keyEventCode = new Integer[]{KeyEvent.VK_CONTROL,KeyEvent.VK_A};
 	private final static String methodName = "addFolder";
 	public AddFolderRaccourci(Component component) {
-		super(component, methodName, keyEventCode);
+		super(component, methodName, KeyEvent.VK_CONTROL,KeyEvent.VK_A);
 	}
 }

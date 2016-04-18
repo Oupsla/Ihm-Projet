@@ -30,7 +30,7 @@ import javax.swing.SwingConstants;
 public class FolderIhm extends JPanel {
 
 	private final String FOLDER_IMG_PATH = "./img/folder.png";
-	
+	private JPanel folderPanel;
 	public void initHeaderPanel() {
 		JPanel headerPanel = new JPanel();
 		headerPanel.setLayout(new FlowLayout());
@@ -42,17 +42,19 @@ public class FolderIhm extends JPanel {
 	public FolderIhm() {
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
+		this.setFocusable(true);
+		this.addKeyListener(new AddFolderRaccourci(this));
 		initHeaderPanel();
 		initContentPanel();
 		this.setBackground(Color.WHITE);
 		
 	}
 	public void initContentPanel() {
-		JPanel contentPanel = new JPanel();
+		folderPanel = new JPanel();
 		FlowLayout lay = new FlowLayout();
 		lay.setVgap(20);
 		lay.setHgap(30);
-		contentPanel.setLayout(lay);
+		folderPanel.setLayout(lay);
 		BufferedImage buttonIcon = null;
 		try {
 			buttonIcon = ImageIO.read(new File(FOLDER_IMG_PATH));
@@ -89,9 +91,34 @@ public class FolderIhm extends JPanel {
 
 			}
 		});
-		contentPanel.add(button);
-		contentPanel.add(button2);
-		contentPanel.setBackground(Color.white);
-		this.add(contentPanel,BorderLayout.LINE_START);
+		folderPanel.add(button);
+		folderPanel.add(button2);
+		folderPanel.setBackground(Color.white);
+		this.add(folderPanel,BorderLayout.LINE_START);
+	}
+	public void addFolder() {
+		BufferedImage buttonIcon = null;
+		try {
+			buttonIcon = ImageIO.read(new File(FOLDER_IMG_PATH));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		JButton button2 = new JButton(new ImageIcon(buttonIcon));
+		button2.setText("ACT");
+		button2.setVerticalTextPosition(SwingConstants.BOTTOM);
+	    button2.setHorizontalTextPosition(SwingConstants.CENTER);
+		button2.setBackground(Color.white);
+	    button2.setBorder(BorderFactory.createEmptyBorder());
+		button2.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				NotesIhm notes = new NotesIhm("CAR");
+				Main.Instance.switchFrame(notes);
+
+			}
+		});
+		folderPanel.add(button2);
+		this.validate();
+		this.repaint();
 	}
 }

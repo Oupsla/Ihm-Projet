@@ -21,13 +21,15 @@ public class AddFolderRaccourci implements KeyListener {
 	        	if(pressed.contains(KeyEvent.VK_CONTROL) && 
 	        	   pressed.contains(KeyEvent.VK_A) && haveRelease) {
 	        		panel.addFolder();
+	        		pressed.clear();
 	        		haveRelease = false;
 	        	}
 	        }
 	    }
 
 	    public synchronized void keyReleased(KeyEvent e) {
-	        pressed.remove(e.getKeyChar());
+	    	if(pressed.contains(e.getKeyChar()))
+	    		pressed.remove(e.getKeyChar());
 	        haveRelease = true;
 	    }
 

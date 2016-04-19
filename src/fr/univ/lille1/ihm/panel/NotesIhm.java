@@ -50,7 +50,7 @@ public class NotesIhm extends JPanel {
 		button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				Main.Instance.switchFrame(new FolderIhm());
+				Main.Instance.switchFrame(new FolderIhm(Main.mainFrame));
 			}
 		});
 		this.add(button);

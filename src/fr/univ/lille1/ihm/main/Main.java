@@ -17,7 +17,7 @@ public class Main {
 	public final static int largeur = 800;
 	public final static int hauteur = 600;
 
-	private JFrame mainFrame;
+	public static JFrame mainFrame;
 	private JPanel panelActuel;
 
 	public Main() {
@@ -26,7 +26,7 @@ public class Main {
 		mainFrame.setPreferredSize(new Dimension(largeur, hauteur));
 		mainFrame.getContentPane().setLayout(new CardLayout());
 		mainFrame.setResizable(false);
-		panelActuel = new FolderIhm();
+		panelActuel = new FolderIhm(mainFrame);
 		mainFrame.add(panelActuel);
 		mainFrame.pack();
 		mainFrame.setBackground(Color.white);

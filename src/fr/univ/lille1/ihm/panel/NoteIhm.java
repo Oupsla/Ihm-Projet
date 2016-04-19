@@ -1,4 +1,5 @@
 package fr.univ.lille1.ihm.panel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import fr.univ.lille1.ihm.listener.SlideGaucheListener;
 import fr.univ.lille1.ihm.main.Main;
 
 /**
@@ -32,7 +34,7 @@ import fr.univ.lille1.ihm.main.Main;
  * 
  */
 public class NoteIhm extends JPanel {
-	
+
 	private static Boolean partie1Ouverte = true;
 	private static Boolean partie2Ouverte = true;
 	private static Boolean chapOuvert = true;
@@ -46,11 +48,25 @@ public class NoteIhm extends JPanel {
 			+ "							<p>Quo cognito Constantius ultra mortalem modum exarsit ac nequo casu idem Gallus de futuris incertus agitare quaedam conducentia saluti suae per itinera conaretur, remoti sunt omnes de industria milites agentes in civitatibus perviis.</p>";
 	private static String ligneHorizontale = "<hr>";
 
+	private String cours;
+	
+	public void addFolder() {
+		NotesIhm notes = new NotesIhm(cours);
+		Main.Instance.switchFrame(notes);
+	}
+
 	public NoteIhm(final String cours) {
 		this.setLayout(new BorderLayout());
+		this.cours = cours;
 		final JEditorPane ep = new JEditorPane();
+
+		SlideGaucheListener slideListener = new SlideGaucheListener(this, "addFolder", 300);
+		ep.addMouseListener(slideListener);
+		ep.addMouseMotionListener(slideListener);
+
 		ep.setContentType("text/html");
-		ep.setText(titreChapite + titrePartie1 + textePartie1 + titrePartie2 + textePartie2);
+		ep.setText(titreChapite + titrePartie1 + textePartie1 + titrePartie2
+				+ textePartie2);
 		this.add(ep, BorderLayout.CENTER);
 
 		JButton partagerLaNote = new JButton("Partager ce cours");
@@ -58,7 +74,8 @@ public class NoteIhm extends JPanel {
 		pPartage.add(partagerLaNote);
 		partagerLaNote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ToastMessage toastMessage = new ToastMessage("Le cours a bien été partagé", 3000);
+				ToastMessage toastMessage = new ToastMessage(
+						"Le cours a bien été partagé", 3000);
 				toastMessage.setVisible(true);
 			}
 		});
@@ -122,7 +139,8 @@ public class NoteIhm extends JPanel {
 				if (expandChap.getText().equals("+")) {
 					expandChap.setText("-");
 					expandChap.setMargin(new java.awt.Insets(0, 2, 0, 3));
-					ep.setText(titreChapite + titrePartie1 + textePartie1 + titrePartie2 + textePartie2);
+					ep.setText(titreChapite + titrePartie1 + textePartie1
+							+ titrePartie2 + textePartie2);
 					expandPart1.setVisible(true);
 					expandPart2.setVisible(true);
 					expandPart1.setText("-");
@@ -150,9 +168,11 @@ public class NoteIhm extends JPanel {
 					expandPart2.setMargin(new java.awt.Insets(0, 2, 0, 3));
 					String finale = titreChapite;
 					if (expandPart1.getText().equals("-")) {
-						finale += titrePartie1 + textePartie1 + titrePartie2 + textePartie2;
+						finale += titrePartie1 + textePartie1 + titrePartie2
+								+ textePartie2;
 					} else {
-						finale += titrePartie1 + ligneHorizontale + titrePartie2 + textePartie2;
+						finale += titrePartie1 + ligneHorizontale
+								+ titrePartie2 + textePartie2;
 					}
 					ep.setText(finale);
 				} else {
@@ -160,9 +180,11 @@ public class NoteIhm extends JPanel {
 					expandPart2.setMargin(new java.awt.Insets(0, 0, 0, 0));
 					String finale = titreChapite;
 					if (expandPart1.getText().equals("-")) {
-						finale += titrePartie1 + textePartie1 + titrePartie2 + ligneHorizontale;
+						finale += titrePartie1 + textePartie1 + titrePartie2
+								+ ligneHorizontale;
 					} else {
-						finale += titrePartie1 + ligneHorizontale + titrePartie2 + ligneHorizontale;
+						finale += titrePartie1 + ligneHorizontale
+								+ titrePartie2 + ligneHorizontale;
 					}
 					ep.setText(finale);
 
@@ -190,9 +212,11 @@ public class NoteIhm extends JPanel {
 					expandPart1.setMargin(new java.awt.Insets(0, 2, 0, 3));
 					String finale = titreChapite;
 					if (expandPart2.getText().equals("-")) {
-						finale += titrePartie1 + textePartie1 + titrePartie2 + textePartie2;
+						finale += titrePartie1 + textePartie1 + titrePartie2
+								+ textePartie2;
 					} else {
-						finale += titrePartie1 + textePartie1 + titrePartie2 + ligneHorizontale;
+						finale += titrePartie1 + textePartie1 + titrePartie2
+								+ ligneHorizontale;
 					}
 					ep.setText(finale);
 
@@ -213,9 +237,11 @@ public class NoteIhm extends JPanel {
 					String finale = titreChapite;
 					if (expandPart2.getText().equals("-")) {
 						System.out.println("coucou");
-						finale += titrePartie1 + ligneHorizontale + titrePartie2 + textePartie2;
+						finale += titrePartie1 + ligneHorizontale
+								+ titrePartie2 + textePartie2;
 					} else {
-						finale += titrePartie1 + ligneHorizontale + titrePartie2 + ligneHorizontale;
+						finale += titrePartie1 + ligneHorizontale
+								+ titrePartie2 + ligneHorizontale;
 					}
 
 					ep.setText(finale);
@@ -223,22 +249,21 @@ public class NoteIhm extends JPanel {
 
 			}
 		});
-		
-		
-		if(!partie1Ouverte){
+
+		if (!partie1Ouverte) {
 			expandPart1.doClick();
 		}
-		
-		if(!partie2Ouverte){
+
+		if (!partie2Ouverte) {
 			expandPart2.doClick();
 		}
-		
-		if(!chapOuvert){
+
+		if (!chapOuvert) {
 			expandChap.doClick();
 		}
-		
 
 	}
+
 
 	private class ToastMessage extends JDialog {
 		int miliseconds;

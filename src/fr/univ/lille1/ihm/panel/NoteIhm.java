@@ -32,6 +32,10 @@ import fr.univ.lille1.ihm.main.Main;
  * 
  */
 public class NoteIhm extends JPanel {
+	
+	private static Boolean partie1Ouverte = true;
+	private static Boolean partie2Ouverte = true;
+	private static Boolean chapOuvert = true;
 
 	private static String titreChapite = "<h1>Chapître 1</h1>";
 	private static String titrePartie1 = "<h2>Partie I</h2>";
@@ -114,6 +118,7 @@ public class NoteIhm extends JPanel {
 		expandChap.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				chapOuvert = !chapOuvert;
 				if (expandChap.getText().equals("+")) {
 					expandChap.setText("-");
 					expandChap.setMargin(new java.awt.Insets(0, 2, 0, 3));
@@ -139,6 +144,7 @@ public class NoteIhm extends JPanel {
 		expandPart2.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				partie2Ouverte = !partie2Ouverte;
 				if (expandPart2.getText().equals("+")) {
 					expandPart2.setText("-");
 					expandPart2.setMargin(new java.awt.Insets(0, 2, 0, 3));
@@ -168,8 +174,8 @@ public class NoteIhm extends JPanel {
 		expandPart1.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				partie1Ouverte = !partie1Ouverte;
 				if (expandPart1.getText().equals("+")) {
-
 					JPanel p = new JPanel();
 					p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 					p.add(Box.createRigidArea(new Dimension(0, 16)));
@@ -217,6 +223,20 @@ public class NoteIhm extends JPanel {
 
 			}
 		});
+		
+		
+		if(!partie1Ouverte){
+			expandPart1.doClick();
+		}
+		
+		if(!partie2Ouverte){
+			expandPart2.doClick();
+		}
+		
+		if(!chapOuvert){
+			expandChap.doClick();
+		}
+		
 
 	}
 

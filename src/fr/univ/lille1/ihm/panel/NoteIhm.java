@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import fr.univ.lille1.ihm.listener.SlideDroiteListener;
+import fr.univ.lille1.ihm.listener.SlideGaucheEditorListener;
 import fr.univ.lille1.ihm.listener.SlideGaucheListener;
 import fr.univ.lille1.ihm.main.Main;
 
@@ -61,7 +62,7 @@ public class NoteIhm extends JPanel {
 		this.cours = cours;
 		final JEditorPane ep = new JEditorPane();
 
-		SlideGaucheListener slideListener = new SlideGaucheListener(this, "addFolder", 300);
+		SlideGaucheEditorListener slideListener = new SlideGaucheEditorListener(ep, this, "addFolder", 300);
 		ep.addMouseListener(slideListener);
 		ep.addMouseMotionListener(slideListener);
 

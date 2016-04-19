@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 
 import javax.swing.JEditorPane;
 
-public class SlideGaucheListener extends MouseAdapter {
+public class SlideGaucheEditorListener extends MouseAdapter {
 
 	private Boolean isPressed = false;
 	private MouseEvent start = null;
@@ -19,9 +19,10 @@ public class SlideGaucheListener extends MouseAdapter {
 	private Component component;
 	private int pixelSlide;
 
-	public SlideGaucheListener(Component component, String methodNameGauche, int pixelSlide) {		
-		this.editor = (JEditorPane) component;
-		
+	public SlideGaucheEditorListener(JEditorPane editor, Component component,
+			String methodNameGauche, int pixelSlide) {
+		this.editor = editor;
+
 		this.methodNameGauche = methodNameGauche;
 		this.component = component;
 		this.pixelSlide = pixelSlide;
@@ -48,11 +49,10 @@ public class SlideGaucheListener extends MouseAdapter {
 	public void mouseDragged(MouseEvent e) {
 		if (isPressed && start != null) {
 			if (start.getX() - e.getX() >= pixelSlide) {
-				
-				
-				if(editor.getSelectedText() != "")
+
+				if (editor.getSelectedText() != null)
 					return;
-				
+
 				try {
 					method.invoke(component);
 				} catch (IllegalAccessException x) {

@@ -1,58 +1,65 @@
 package fr.univ.lille1.ihm.panel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import fr.univ.lille1.ihm.listener.AddFolderRaccourci;
+import fr.univ.lille1.ihm.listener.TimerLongClickListener;
 import fr.univ.lille1.ihm.main.Main;
 
 /**
- * Interface representant plusieurs cours sous forme de dossier
- * Un clic sur un des dossies crée une nouvelle instance de NotesIhm
- * et demande au Main de changer le panel actuel
+ * Interface representant plusieurs cours sous forme de dossier Un clic sur un
+ * des dossies crée une nouvelle instance de NotesIhm et demande au Main de
+ * changer le panel actuel
  * 
  */
 public class FolderIhm extends JPanel {
 
 	private final String FOLDER_IMG_PATH = "./img/folder.png";
 	private JPanel folderPanel;
+
 	public void initHeaderPanel() {
 		JPanel headerPanel = new JPanel();
 		headerPanel.setLayout(new FlowLayout());
 		JLabel label = new JLabel("Ensemble de vos cours :");
 		headerPanel.add(label);
 		headerPanel.setBackground(Color.white);
-		this.add(headerPanel,BorderLayout.PAGE_START);
+		this.add(headerPanel, BorderLayout.PAGE_START);
 	}
+
 	public FolderIhm() {
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 		this.setFocusable(true);
+
 		this.addKeyListener(new AddFolderRaccourci(this));
+		this.addMouseListener(new TimerLongClickListener(this, "addFolder"));
+
 		initHeaderPanel();
 		initContentPanel();
 		this.setBackground(Color.WHITE);
-		
+
 	}
+
 	public void initContentPanel() {
 		folderPanel = new JPanel();
 		FlowLayout lay = new FlowLayout();
@@ -70,14 +77,14 @@ public class FolderIhm extends JPanel {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setText("CAR");
 		button.setVerticalTextPosition(SwingConstants.BOTTOM);
-	    button.setHorizontalTextPosition(SwingConstants.CENTER);
-	    button.setBackground(Color.white);
+		button.setHorizontalTextPosition(SwingConstants.CENTER);
+		button.setBackground(Color.white);
 		JButton button2 = new JButton(new ImageIcon(buttonIcon));
 		button2.setText("IHM");
 		button2.setVerticalTextPosition(SwingConstants.BOTTOM);
-	    button2.setHorizontalTextPosition(SwingConstants.CENTER);
+		button2.setHorizontalTextPosition(SwingConstants.CENTER);
 		button2.setBackground(Color.white);
-	    button2.setBorder(BorderFactory.createEmptyBorder());
+		button2.setBorder(BorderFactory.createEmptyBorder());
 		button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -98,8 +105,9 @@ public class FolderIhm extends JPanel {
 		folderPanel.add(button);
 		folderPanel.add(button2);
 		folderPanel.setBackground(Color.white);
-		this.add(folderPanel,BorderLayout.LINE_START);
+		this.add(folderPanel, BorderLayout.LINE_START);
 	}
+
 	public void addFolder() {
 		BufferedImage buttonIcon = null;
 		try {
@@ -110,9 +118,9 @@ public class FolderIhm extends JPanel {
 		JButton button2 = new JButton(new ImageIcon(buttonIcon));
 		button2.setText("ACT");
 		button2.setVerticalTextPosition(SwingConstants.BOTTOM);
-	    button2.setHorizontalTextPosition(SwingConstants.CENTER);
+		button2.setHorizontalTextPosition(SwingConstants.CENTER);
 		button2.setBackground(Color.white);
-	    button2.setBorder(BorderFactory.createEmptyBorder());
+		button2.setBorder(BorderFactory.createEmptyBorder());
 		button2.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {

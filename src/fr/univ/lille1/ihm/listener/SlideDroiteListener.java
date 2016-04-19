@@ -6,22 +6,22 @@ import java.awt.event.MouseEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class SlideDroitListener extends MouseAdapter {
+public class SlideDroiteListener extends MouseAdapter {
 
 	private Boolean isPressed = false;
 	private MouseEvent start = null;
 
-	private static String methodNameGauche = "";
+	private static String methodNameDroit = "";
 	private Method method;
 	private Component component;
 	private int pixelSlide;
 
-	public SlideDroitListener(Component component, String methodNameGauche, int pixelSlide) {
-		this.methodNameGauche = methodNameGauche;
+	public SlideDroiteListener(Component component, String methodNameDroit, int pixelSlide) {
+		this.methodNameDroit = methodNameDroit;
 		this.component = component;
 		this.pixelSlide = pixelSlide;
 		try {
-			this.method = component.getClass().getMethod(methodNameGauche);
+			this.method = component.getClass().getMethod(methodNameDroit);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,7 +42,7 @@ public class SlideDroitListener extends MouseAdapter {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (isPressed && start != null) {
-			if (start.getX() - e.getX() >= pixelSlide) {
+			if (start.getX() - e.getX() <= pixelSlide) {
 				try {
 					method.invoke(component);
 				} catch (IllegalAccessException x) {

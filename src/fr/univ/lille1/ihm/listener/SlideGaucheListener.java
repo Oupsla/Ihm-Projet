@@ -11,17 +11,17 @@ public class SlideGaucheListener extends MouseAdapter {
 	private Boolean isPressed = false;
 	private MouseEvent start = null;
 
-	private static String methodNameDroit = "";
+	private static String methodNameGauche = "";
 	private Method method;
 	private Component component;
 	private int pixelSlide;
 
-	public SlideGaucheListener(Component component, String methodNameDroit, int pixelSlide) {
-		this.methodNameDroit = methodNameDroit;
+	public SlideGaucheListener(Component component, String methodNameGauche, int pixelSlide) {
+		this.methodNameGauche = methodNameGauche;
 		this.component = component;
 		this.pixelSlide = pixelSlide;
 		try {
-			this.method = component.getClass().getMethod(methodNameDroit);
+			this.method = component.getClass().getMethod(methodNameGauche);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,7 +42,7 @@ public class SlideGaucheListener extends MouseAdapter {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (isPressed && start != null) {
-			if (start.getX() - e.getX() <= pixelSlide) {
+			if (start.getX() - e.getX() >= pixelSlide) {
 				try {
 					method.invoke(component);
 				} catch (IllegalAccessException x) {

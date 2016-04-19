@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import fr.univ.lille1.ihm.listener.SlideDroiteListener;
 import fr.univ.lille1.ihm.listener.SlideGaucheListener;
 import fr.univ.lille1.ihm.main.Main;
 

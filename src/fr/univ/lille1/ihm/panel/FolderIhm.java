@@ -35,6 +35,8 @@ import fr.univ.lille1.ihm.main.Main;
 public class FolderIhm extends JPanel {
 
 	private final String FOLDER_IMG_PATH = "./img/folder.png";
+	private final String PLUS_IMG_PATH = "./img/plus.png";
+	private JButton addButton;
 	private JPanel folderPanel;
 
 	public void initHeaderPanel() {
@@ -67,8 +69,10 @@ public class FolderIhm extends JPanel {
 		lay.setHgap(30);
 		folderPanel.setLayout(lay);
 		BufferedImage buttonIcon = null;
+		BufferedImage plusIcon = null;
 		try {
 			buttonIcon = ImageIO.read(new File(FOLDER_IMG_PATH));
+			plusIcon = ImageIO.read(new File(PLUS_IMG_PATH));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -102,8 +106,20 @@ public class FolderIhm extends JPanel {
 
 			}
 		});
+		addButton = new JButton(new ImageIcon(plusIcon));
+		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		addButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		addButton.setBackground(Color.white);
+		addButton.setBorder(BorderFactory.createEmptyBorder());
+		addButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				addFolder();
+			}
+		});
 		folderPanel.add(button);
 		folderPanel.add(button2);
+		folderPanel.add(addButton);
 		folderPanel.setBackground(Color.white);
 		this.add(folderPanel, BorderLayout.LINE_START);
 	}
@@ -129,7 +145,9 @@ public class FolderIhm extends JPanel {
 
 			}
 		});
+		folderPanel.remove(addButton);
 		folderPanel.add(button2);
+		folderPanel.add(addButton);
 		this.validate();
 		this.repaint();
 	}

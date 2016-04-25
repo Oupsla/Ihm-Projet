@@ -125,14 +125,65 @@ public class NoteIhm extends JPanel {
 		wraperLeft.add(pBack, BorderLayout.WEST);
 
 		this.add(wraperLeft, BorderLayout.WEST);
-
+		
+		
+		JPanel wraperRight = new JPanel(new BorderLayout());
 		JButton superNote = new JButton(">");
 		superNote.setFocusable(false);
 		JPanel pDroit = new JPanel();
 		pDroit.setLayout(new BoxLayout(pDroit, BoxLayout.Y_AXIS));
 		pDroit.add(Box.createRigidArea(new Dimension(0, Main.hauteur / 2)));
 		pDroit.add(superNote);
-		this.add(pDroit, BorderLayout.EAST);
+		wraperRight.add(pDroit, BorderLayout.EAST);
+		
+		superNote.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SuperNoteIhm superNote = new SuperNoteIhm(cours);
+				Main.Instance.switchFrame(superNote);
+				
+			}
+		});
+		
+		
+		JButton btnShare1 = new JButton("s");
+		JButton btnShare2 = new JButton("s");
+		JButton btnShare3 = new JButton("s");
+		btnShare1.setMargin(new java.awt.Insets(0, 2, 0, 3));
+		btnShare2.setMargin(new java.awt.Insets(0, 2, 0, 3));
+		btnShare3.setMargin(new java.awt.Insets(0, 2, 0, 3));
+		btnShare1.setFocusable(false);
+		btnShare2.setFocusable(false);
+		btnShare3.setFocusable(false);
+		
+		ActionListener actionPartageSection = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ToastMessage toastMessage = new ToastMessage(
+						"Cette partie a bien été partagée", 3000);
+				toastMessage.setVisible(true);				
+			}
+		};
+		
+		btnShare1.addActionListener(actionPartageSection);
+		btnShare2.addActionListener(actionPartageSection);
+		btnShare3.addActionListener(actionPartageSection);
+		
+		
+		JPanel pShare = new JPanel();
+		pShare.setLayout(new BoxLayout(pShare, BoxLayout.Y_AXIS));
+		pShare.add(Box.createRigidArea(new Dimension(0, 16)));
+		pShare.add(btnShare1);
+		pShare.add(Box.createRigidArea(new Dimension(0, 25)));
+		pShare.add(btnShare2);
+		pShare.add(Box.createRigidArea(new Dimension(0, 86)));
+		pShare.add(btnShare3);
+
+		wraperRight.add(pShare, BorderLayout.WEST);
+		
+		this.add(wraperRight, BorderLayout.EAST);
 
 		expandChap.addActionListener(new ActionListener() {
 
@@ -145,6 +196,10 @@ public class NoteIhm extends JPanel {
 							+ titrePartie2 + textePartie2);
 					expandPart1.setVisible(true);
 					expandPart2.setVisible(true);
+					
+					btnShare2.setVisible(true);
+					btnShare3.setVisible(true);
+					
 					expandPart1.setText("-");
 					expandPart1.setMargin(new java.awt.Insets(0, 2, 0, 3));
 					expandPart2.setText("-");
@@ -155,6 +210,9 @@ public class NoteIhm extends JPanel {
 					ep.setText(titreChapite + ligneHorizontale);
 					expandPart1.setVisible(false);
 					expandPart2.setVisible(false);
+					
+					btnShare2.setVisible(false);
+					btnShare3.setVisible(false);
 
 				}
 
@@ -208,7 +266,23 @@ public class NoteIhm extends JPanel {
 					p.add(expandPart1);
 					p.add(Box.createRigidArea(new Dimension(0, 86)));
 					p.add(expandPart2);
-					NoteIhm.this.add(p, BorderLayout.WEST);
+					
+					wraperLeft.add(p, BorderLayout.EAST);
+					//NoteIhm.this.add(p, BorderLayout.WEST);
+					
+					
+					JPanel pShare = new JPanel();
+					pShare.setLayout(new BoxLayout(pShare, BoxLayout.Y_AXIS));
+					pShare.add(Box.createRigidArea(new Dimension(0, 16)));
+					pShare.add(btnShare1);
+					pShare.add(Box.createRigidArea(new Dimension(0, 25)));
+					pShare.add(btnShare2);
+					pShare.add(Box.createRigidArea(new Dimension(0, 86)));
+					pShare.add(btnShare3);
+
+					wraperRight.add(pShare, BorderLayout.WEST);
+					
+					
 
 					expandPart1.setText("-");
 					expandPart1.setMargin(new java.awt.Insets(0, 2, 0, 3));
@@ -232,7 +306,21 @@ public class NoteIhm extends JPanel {
 					p.add(expandPart1);
 					p.add(Box.createRigidArea(new Dimension(0, 31)));
 					p.add(expandPart2);
-					NoteIhm.this.add(p, BorderLayout.WEST);
+					
+					wraperLeft.add(p, BorderLayout.EAST);
+					//NoteIhm.this.add(p, BorderLayout.WEST);
+					
+					
+					JPanel pShare = new JPanel();
+					pShare.setLayout(new BoxLayout(pShare, BoxLayout.Y_AXIS));
+					pShare.add(Box.createRigidArea(new Dimension(0, 16)));
+					pShare.add(btnShare1);
+					pShare.add(Box.createRigidArea(new Dimension(0, 25)));
+					pShare.add(btnShare2);
+					pShare.add(Box.createRigidArea(new Dimension(0, 31)));
+					pShare.add(btnShare3);
+
+					wraperRight.add(pShare, BorderLayout.WEST);
 
 					expandPart1.setText("+");
 					expandPart1.setMargin(new java.awt.Insets(0, 0, 0, 0));

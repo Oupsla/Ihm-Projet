@@ -3,7 +3,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

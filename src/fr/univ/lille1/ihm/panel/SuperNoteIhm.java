@@ -166,13 +166,8 @@ public class SuperNoteIhm extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String[] choices = { "1.0", "1.1", "1.9", "2.0", "2.5", "2.5.1" };
-				String input = (String) JOptionPane.showInputDialog(null, "Version...", "Choisir la version",
-						JOptionPane.QUESTION_MESSAGE, null, // Use
-															// default
-															// icon
-						choices, // Array of choices
-						choices[1]); // Initial choice
+				Revision r = new Revision(cours);
+				Main.Instance.switchFrame(r);
 			}
 		};
 

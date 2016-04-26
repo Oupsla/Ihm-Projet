@@ -1,6 +1,7 @@
 package fr.univ.lille1.ihm.panel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,6 +13,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -53,7 +56,17 @@ public class NotesIhm extends JPanel {
 				Main.Instance.switchFrame(new FolderIhm(Main.mainFrame));
 			}
 		});
-		this.add(button);
+		
+		
+		button.setFocusable(false);
+		JPanel pGauche = new JPanel();
+		pGauche.setLayout(new BoxLayout(pGauche, BoxLayout.Y_AXIS));
+		pGauche.add(Box.createRigidArea(new Dimension(0, Main.hauteur / 2)));
+		pGauche.add(button);
+		
+		this.add(pGauche,BorderLayout.WEST);
+
+		
 		this.setFocusable(true);
 		initHeaderPanel();
 		initContentPanel();
@@ -100,7 +113,7 @@ public class NotesIhm extends JPanel {
 		filePanel.add(exempleCours2);
 		filePanel.add(exempleCours3);
 		filePanel.setBackground(Color.white);
-		this.add(filePanel,BorderLayout.LINE_START);
+		this.add(filePanel,BorderLayout.CENTER);
 	}
 	
 

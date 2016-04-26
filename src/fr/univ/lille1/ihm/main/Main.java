@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import fr.univ.lille1.ihm.panel.FolderIhm;
+import fr.univ.lille1.ihm.panel.Revision;
 
 public class Main {
 
@@ -26,6 +27,7 @@ public class Main {
 		mainFrame.getContentPane().setLayout(new CardLayout());
 		mainFrame.setResizable(false);
 		panelActuel = new FolderIhm(mainFrame);
+		//panelActuel = new Revision("cucou");
 		mainFrame.add(panelActuel);
 		mainFrame.pack();
 		mainFrame.setBackground(Color.white);

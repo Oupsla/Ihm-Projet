@@ -52,8 +52,8 @@ public class SuperNoteIhm extends JPanel {
 
 	private String cours;
 
-	public void addFolder() {
-		NotesIhm notes = new NotesIhm(cours);
+	public void back() {
+		NoteIhm notes = new NoteIhm(cours);
 		Main.Instance.switchFrame(notes);
 	}
 
@@ -63,7 +63,7 @@ public class SuperNoteIhm extends JPanel {
 		final JEditorPane ep = new JEditorPane();
 		ep.setEditable(false);
 
-		SlideGaucheEditorListener slideListener = new SlideGaucheEditorListener(ep, this, "addFolder", 300);
+		SlideGaucheEditorListener slideListener = new SlideGaucheEditorListener(ep, this, "back", 300);
 		ep.addMouseListener(slideListener);
 		ep.addMouseMotionListener(slideListener);
 

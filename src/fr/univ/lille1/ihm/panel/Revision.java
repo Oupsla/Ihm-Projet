@@ -42,12 +42,12 @@ public class Revision extends JPanel {
 
 	private static String titrePartie1 = "<h2>Partie I</h2>";
 	private static String textePartie1 = "<p>Saraceni tamen nec amici nobis umquam nec hostes optandi, ultro citroque discursantes quicquid inveniri poterat momento temporis parvi vastabant milvorum rapacium similes, qui si praedam dispexerint celsius, volatu rapiunt celeri, aut nisi impetraverint, non inmorantur.</p>";
-	private static String ligneHorizontale = "<hr>";
+	private static String ligneHorizontale = "<br><hr>";
 
 	private String cours;
 
-	public void addFolder() {
-		NotesIhm notes = new NotesIhm(cours);
+	public void back() {
+		SuperNoteIhm notes = new SuperNoteIhm(cours);
 		Main.Instance.switchFrame(notes);
 	}
 
@@ -57,14 +57,14 @@ public class Revision extends JPanel {
 		final JEditorPane ep = new JEditorPane();
 		ep.setEditable(false);
 
-		SlideGaucheEditorListener slideListener = new SlideGaucheEditorListener(ep, this, "addFolder", 300);
+		SlideGaucheEditorListener slideListener = new SlideGaucheEditorListener(ep, this, "back", 300);
 		ep.addMouseListener(slideListener);
 		ep.addMouseMotionListener(slideListener);
 
+
 		ep.setContentType("text/html");
 		ep.setText(titrePartie1 + textePartie1 + ligneHorizontale + titrePartie1 + textePartie1 + ligneHorizontale
-				+ titrePartie1 + textePartie1 + ligneHorizontale + titrePartie1 + textePartie1 + ligneHorizontale
-				+ titrePartie1 + textePartie1);
+				+ titrePartie1 + textePartie1 + ligneHorizontale + titrePartie1 + textePartie1);
 		this.add(new JScrollPane(ep), BorderLayout.CENTER);
 
 		final JButton btnScore1 = new JButton("36");
@@ -287,16 +287,16 @@ public class Revision extends JPanel {
 
 		JPanel p = new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-		p.add(Box.createRigidArea(new Dimension(0, 10)));
+		p.add(Box.createRigidArea(new Dimension(0, 20)));
 		p.add(panelScoreEtVote1);
-		p.add(Box.createRigidArea(new Dimension(0, 40)));
+		p.add(Box.createRigidArea(new Dimension(0, 30)));
 		p.add(panelScoreEtVote2);
-		p.add(Box.createRigidArea(new Dimension(0, 30)));
+		p.add(Box.createRigidArea(new Dimension(0, 25)));
 		p.add(panelScoreEtVote3);
-		p.add(Box.createRigidArea(new Dimension(0, 30)));
+		p.add(Box.createRigidArea(new Dimension(0, 25)));
 		p.add(panelScoreEtVote4);
-		p.add(Box.createRigidArea(new Dimension(0, 30)));
-		p.add(panelScoreEtVote5);
+		//p.add(Box.createRigidArea(new Dimension(0, 30)));
+		//p.add(panelScoreEtVote5);
 
 		wraperLeft.add(p, BorderLayout.EAST);
 
@@ -365,18 +365,18 @@ public class Revision extends JPanel {
 		pShare.add(Box.createRigidArea(new Dimension(0, 16)));
 		pShare.add(btnShare1);
 		pShare.add(name1);
-		pShare.add(Box.createRigidArea(new Dimension(0, 86)));
+		pShare.add(Box.createRigidArea(new Dimension(0, 95)));
 		pShare.add(btnShare2);
 		pShare.add(name2);
-		pShare.add(Box.createRigidArea(new Dimension(0, 95)));
+		pShare.add(Box.createRigidArea(new Dimension(0, 115)));
 		pShare.add(btnShare3);
 		pShare.add(name3);
-		pShare.add(Box.createRigidArea(new Dimension(0, 95)));
+		pShare.add(Box.createRigidArea(new Dimension(0, 115)));
 		pShare.add(btnShare4);
 		pShare.add(name4);
-		pShare.add(Box.createRigidArea(new Dimension(0, 95)));
-		pShare.add(btnShare5);
-		pShare.add(name5);
+		//pShare.add(Box.createRigidArea(new Dimension(0, 95)));
+		//pShare.add(btnShare5);
+		//pShare.add(name5);
 
 		wraperRight.add(pShare, BorderLayout.WEST);
 

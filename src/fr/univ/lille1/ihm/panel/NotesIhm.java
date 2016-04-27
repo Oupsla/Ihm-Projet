@@ -3,8 +3,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -19,10 +17,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-import fr.univ.lille1.ihm.listener.AddFolderRaccourci;
+import fr.univ.lille1.ihm.listener.SlideGaucheListener;
 import fr.univ.lille1.ihm.main.Main;
+import fr.univ.lille1.ihm.menu.MenuListener;
 
 /**
  * Interface representant plusieurs notes pour un même cours Un clic sur un
@@ -34,6 +32,13 @@ public class NotesIhm extends JPanel {
 	public String cours;
 	private final String FILE_IMG_PATH = "./img/file.png";
 	private JPanel filePanel;
+	private final String PLUS_IMG_PATH = "./img/plus.png";
+	private JButton addButton;
+	
+	public void back() {
+		FolderIhm notes = new FolderIhm(Main.mainFrame);
+		Main.Instance.switchFrame(notes);
+	}
 	
 	public void initHeaderPanel() {
 		JPanel headerPanel = new JPanel();
@@ -50,6 +55,7 @@ public class NotesIhm extends JPanel {
 		this.setLayout(layout);
 
 		JButton button = new JButton("<");
+		button.setToolTipText("Revenir aux cours");
 		button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -71,8 +77,6 @@ public class NotesIhm extends JPanel {
 		initHeaderPanel();
 		initContentPanel();
 		this.setBackground(Color.WHITE);
-		
-		
 	}
 	
 	public void initContentPanel() {
@@ -96,17 +100,23 @@ public class NotesIhm extends JPanel {
 		};
 
 		JButton exempleCours1 = new JButton(new ImageIcon(buttonIcon));
-		exempleCours1.setText("cour 1");
+		exempleCours1.setBorder(BorderFactory.createEmptyBorder());
+		exempleCours1.setText("cours 1");
 		exempleCours1.setBackground(Color.white);
 		exempleCours1.addActionListener(al);
 		JButton exempleCours2 = new JButton(new ImageIcon(buttonIcon));
-		exempleCours2.setText("cour 2");
+		exempleCours2.setBorder(BorderFactory.createEmptyBorder());
+		exempleCours2.setText("cours 2");
 		exempleCours2.setBackground(Color.white);
 		exempleCours2.addActionListener(al);
 		JButton exempleCours3 = new JButton(new ImageIcon(buttonIcon));
-		exempleCours3.setText("cour 3");
+		exempleCours3.setBorder(BorderFactory.createEmptyBorder());
+		exempleCours3.setText("cours 3");
 		exempleCours3.setBackground(Color.white);
 		exempleCours3.addActionListener(al);
+		SlideGaucheListener slideListener = new SlideGaucheListener(this, "back", 300);
+		filePanel.addMouseListener(slideListener);
+		filePanel.addMouseMotionListener(slideListener);
 		
 			
 		filePanel.add(exempleCours1);

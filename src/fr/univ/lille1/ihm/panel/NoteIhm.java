@@ -20,6 +20,7 @@ import javax.swing.border.LineBorder;
 
 import fr.univ.lille1.ihm.listener.SlideGaucheEditorListener;
 import fr.univ.lille1.ihm.main.Main;
+import fr.univ.lille1.ihm.menu.MenuListener;
 
 /**
  * 
@@ -49,7 +50,7 @@ public class NoteIhm extends JPanel {
 	private static String ligneHorizontale = "<hr>";
 
 	private String cours;
-	
+
 	public void back() {
 		NotesIhm notes = new NotesIhm(cours);
 		Main.Instance.switchFrame(notes);
@@ -63,6 +64,39 @@ public class NoteIhm extends JPanel {
 		SlideGaucheEditorListener slideListener = new SlideGaucheEditorListener(ep, this, "back", 300);
 		ep.addMouseListener(slideListener);
 		ep.addMouseMotionListener(slideListener);
+
+		MenuListener menu = new MenuListener() {
+
+			@Override
+			public void share() {
+				// TODO Auto-generated method stub
+				ToastMessage toastMessage = new ToastMessage(
+						"Cette note a bien été partagée", 3000);
+				toastMessage.setVisible(true);				
+			}
+	
+			@Override
+			public void edit() {
+				// TODO Auto-generated method stub
+				System.out.println("edit");
+			}
+
+			@Override
+			public void delete() {
+				// TODO Auto-generated method stub
+				System.out.println("delete");
+			}
+
+			@Override
+			public void back() {
+				// TODO Auto-generated method stub
+				System.out.println("back");
+			}
+		};
+
+		//ep.addMouseListener(menu);
+		//ep.addMouseMotionListener(menu);
+
 
 		ep.setContentType("text/html");
 		ep.setText(titreChapite + titrePartie1 + textePartie1 + titrePartie2
@@ -84,14 +118,17 @@ public class NoteIhm extends JPanel {
 		final JButton expandChap = new JButton("-");
 		expandChap.setMargin(new java.awt.Insets(0, 2, 0, 3));
 		expandChap.setFocusable(false);
+		expandChap.setToolTipText("Minimiser cette partie");
 
 		final JButton expandPart1 = new JButton("-");
 		expandPart1.setMargin(new java.awt.Insets(0, 2, 0, 3));
 		expandPart1.setFocusable(false);
+		expandPart1.setToolTipText("Minimiser cette partie");
 
 		final JButton expandPart2 = new JButton("-");
 		expandPart2.setMargin(new java.awt.Insets(0, 2, 0, 3));
 		expandPart2.setFocusable(false);
+		expandPart2.setToolTipText("Minimiser cette partie");
 
 		JPanel wraperLeft = new JPanel(new BorderLayout());
 
@@ -116,6 +153,7 @@ public class NoteIhm extends JPanel {
 			}
 		});
 		back.setFocusable(false);
+		back.setToolTipText("Revenir aux notes");
 		JPanel pBack = new JPanel();
 		pBack.setLayout(new BoxLayout(pBack, BoxLayout.Y_AXIS));
 		pBack.add(Box.createRigidArea(new Dimension(0, Main.hauteur / 2)));
@@ -123,28 +161,29 @@ public class NoteIhm extends JPanel {
 		wraperLeft.add(pBack, BorderLayout.WEST);
 
 		this.add(wraperLeft, BorderLayout.WEST);
-		
-		
+
+
 		JPanel wraperRight = new JPanel(new BorderLayout());
 		JButton superNote = new JButton(">");
+		superNote.setToolTipText("Aller à la supernote");
 		superNote.setFocusable(false);
 		JPanel pDroit = new JPanel();
 		pDroit.setLayout(new BoxLayout(pDroit, BoxLayout.Y_AXIS));
 		pDroit.add(Box.createRigidArea(new Dimension(0, Main.hauteur / 2)));
 		pDroit.add(superNote);
 		wraperRight.add(pDroit, BorderLayout.EAST);
-		
+
 		superNote.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SuperNoteIhm superNote = new SuperNoteIhm(cours);
 				Main.Instance.switchFrame(superNote);
-				
+
 			}
 		});
-		
-		
+
+
 		JButton btnShare1 = new JButton("s");
 		JButton btnShare2 = new JButton("s");
 		JButton btnShare3 = new JButton("s");
@@ -154,9 +193,14 @@ public class NoteIhm extends JPanel {
 		btnShare1.setFocusable(false);
 		btnShare2.setFocusable(false);
 		btnShare3.setFocusable(false);
-		
+
+		btnShare1.setToolTipText("Partager cette partie");
+		btnShare2.setToolTipText("Partager cette partie");
+		btnShare3.setToolTipText("Partager cette partie");
+
+
 		ActionListener actionPartageSection = new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ToastMessage toastMessage = new ToastMessage(
@@ -164,12 +208,12 @@ public class NoteIhm extends JPanel {
 				toastMessage.setVisible(true);				
 			}
 		};
-		
+
 		btnShare1.addActionListener(actionPartageSection);
 		btnShare2.addActionListener(actionPartageSection);
 		btnShare3.addActionListener(actionPartageSection);
-		
-		
+
+
 		JPanel pShare = new JPanel();
 		pShare.setLayout(new BoxLayout(pShare, BoxLayout.Y_AXIS));
 		pShare.add(Box.createRigidArea(new Dimension(0, 16)));
@@ -180,7 +224,7 @@ public class NoteIhm extends JPanel {
 		pShare.add(btnShare3);
 
 		wraperRight.add(pShare, BorderLayout.WEST);
-		
+
 		this.add(wraperRight, BorderLayout.EAST);
 
 		expandChap.addActionListener(new ActionListener() {
@@ -189,26 +233,29 @@ public class NoteIhm extends JPanel {
 				chapOuvert = !chapOuvert;
 				if (expandChap.getText().equals("+")) {
 					expandChap.setText("-");
+					expandChap.setToolTipText("Minimiser cette partie");
 					expandChap.setMargin(new java.awt.Insets(0, 2, 0, 3));
 					ep.setText(titreChapite + titrePartie1 + textePartie1
 							+ titrePartie2 + textePartie2);
 					expandPart1.setVisible(true);
 					expandPart2.setVisible(true);
-					
+
 					btnShare2.setVisible(true);
 					btnShare3.setVisible(true);
-					
+
 					expandPart1.setText("-");
+					expandPart1.setToolTipText("Minimiser cette partie");
 					expandPart1.setMargin(new java.awt.Insets(0, 2, 0, 3));
 					expandPart2.setText("-");
 					expandPart2.setMargin(new java.awt.Insets(0, 2, 0, 3));
 				} else {
 					expandChap.setText("+");
+					expandChap.setToolTipText("Etendre cette partie");
 					expandChap.setMargin(new java.awt.Insets(0, 0, 0, 0));
 					ep.setText(titreChapite + ligneHorizontale);
 					expandPart1.setVisible(false);
 					expandPart2.setVisible(false);
-					
+
 					btnShare2.setVisible(false);
 					btnShare3.setVisible(false);
 
@@ -223,6 +270,7 @@ public class NoteIhm extends JPanel {
 				partie2Ouverte = !partie2Ouverte;
 				if (expandPart2.getText().equals("+")) {
 					expandPart2.setText("-");
+					expandPart2.setToolTipText("Minimiser cette partie");
 					expandPart2.setMargin(new java.awt.Insets(0, 2, 0, 3));
 					String finale = titreChapite;
 					if (expandPart1.getText().equals("-")) {
@@ -235,6 +283,7 @@ public class NoteIhm extends JPanel {
 					ep.setText(finale);
 				} else {
 					expandPart2.setText("+");
+					expandPart2.setToolTipText("Etendre cette partie");
 					expandPart2.setMargin(new java.awt.Insets(0, 0, 0, 0));
 					String finale = titreChapite;
 					if (expandPart1.getText().equals("-")) {
@@ -264,11 +313,11 @@ public class NoteIhm extends JPanel {
 					p.add(expandPart1);
 					p.add(Box.createRigidArea(new Dimension(0, 86)));
 					p.add(expandPart2);
-					
+
 					wraperLeft.add(p, BorderLayout.EAST);
 					//NoteIhm.this.add(p, BorderLayout.WEST);
-					
-					
+
+
 					JPanel pShare = new JPanel();
 					pShare.setLayout(new BoxLayout(pShare, BoxLayout.Y_AXIS));
 					pShare.add(Box.createRigidArea(new Dimension(0, 16)));
@@ -279,10 +328,11 @@ public class NoteIhm extends JPanel {
 					pShare.add(btnShare3);
 
 					wraperRight.add(pShare, BorderLayout.WEST);
-					
-					
+
+
 
 					expandPart1.setText("-");
+					expandPart1.setToolTipText("Minimiser cette partie");
 					expandPart1.setMargin(new java.awt.Insets(0, 2, 0, 3));
 					String finale = titreChapite;
 					if (expandPart2.getText().equals("-")) {
@@ -304,11 +354,11 @@ public class NoteIhm extends JPanel {
 					p.add(expandPart1);
 					p.add(Box.createRigidArea(new Dimension(0, 31)));
 					p.add(expandPart2);
-					
+
 					wraperLeft.add(p, BorderLayout.EAST);
 					//NoteIhm.this.add(p, BorderLayout.WEST);
-					
-					
+
+
 					JPanel pShare = new JPanel();
 					pShare.setLayout(new BoxLayout(pShare, BoxLayout.Y_AXIS));
 					pShare.add(Box.createRigidArea(new Dimension(0, 16)));
@@ -321,6 +371,7 @@ public class NoteIhm extends JPanel {
 					wraperRight.add(pShare, BorderLayout.WEST);
 
 					expandPart1.setText("+");
+					expandPart1.setToolTipText("Etendre cette partie");
 					expandPart1.setMargin(new java.awt.Insets(0, 0, 0, 0));
 					String finale = titreChapite;
 					if (expandPart2.getText().equals("-")) {

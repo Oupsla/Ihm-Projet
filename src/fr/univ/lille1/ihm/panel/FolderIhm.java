@@ -119,6 +119,7 @@ public class FolderIhm extends JPanel {
 				addFolder();
 			}
 		});
+		addButton.setToolTipText("Ajouter un nouveau cours");
 		folderPanel.add(button);
 		folderPanel.add(button2);
 		folderPanel.add(addButton);

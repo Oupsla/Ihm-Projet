@@ -20,7 +20,7 @@ public class SlideGaucheListener extends MouseAdapter {
 	private int pixelSlide;
 
 	public SlideGaucheListener(Component component, String methodNameGauche, int pixelSlide) {		
-		this.editor = (JEditorPane) component;
+		//this.editor = (JEditorPane) component;
 		
 		this.methodNameGauche = methodNameGauche;
 		this.component = component;
@@ -50,7 +50,7 @@ public class SlideGaucheListener extends MouseAdapter {
 			if (start.getX() - e.getX() >= pixelSlide) {
 				
 				
-				if(editor.getSelectedText() != "")
+				if(editor instanceof JEditorPane && editor.getSelectedText() != "")
 					return;
 				
 				try {
